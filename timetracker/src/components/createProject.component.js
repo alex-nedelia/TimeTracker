@@ -28,12 +28,14 @@ class CreateProject extends React.Component {
 			name: this.state.name,
 			description: this.state.description
 		};
-		axios.post('http://localhost:5000/projects/add', project).then((res) => console.log(res.data));
+		this.props.addNewProject(project);
+
+		this.setState({ name: '', description: '' });
 	}
 
 	render() {
 		return (
-			<div>
+			<div className="mt-4">
 				<div className="input-group mb-3">
 					<div className="input-group-prepend">
 						<span className="input-group-text" id="basic-addon1" />
@@ -45,6 +47,7 @@ class CreateProject extends React.Component {
 						ariaLabel="Title"
 						ariaDescribedby="basic-addon1"
 						onChange={this.onChangeTitle}
+						value={this.state.name}
 					/>
 				</div>
 				<div className="input-group mb-3">
@@ -56,6 +59,7 @@ class CreateProject extends React.Component {
 						placeholder="Type in a description for your project"
 						ariaLabel="With textarea"
 						onChange={this.onChangeDesc}
+						value={this.state.description}
 					/>
 				</div>
 				<div className="list-group-item">
